@@ -1,0 +1,7 @@
+/* ============================================
+   STANDARD FONT STACK
+   Avoids CoreText warnings in Electron
+   ============================================ */
+body {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}

@@ -1,0 +1,190 @@
+/* ============================================
+   DARK THEME
+   ============================================ */
+.theme-dark body {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.theme-dark .container {
+    background: #0f0f1e;
+}
+
+.theme-dark .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+/* Model and Theme dropdowns - darker, less bright for dark mode */
+.theme-dark .model-select,
+.theme-dark .theme-select {
+    background: rgba(255, 255, 255, 0.15);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.theme-dark .model-select:hover,
+.theme-dark .theme-select:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.theme-dark .model-select:focus,
+.theme-dark .theme-select:focus {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: #667eea;
+}
+
+.theme-dark .chat-container {
+    background: #1a1a2e;
+}
+
+.theme-dark .welcome-message {
+    color: #a0aec0;
+}
+
+.theme-dark .welcome-message h2 {
+    color: #e2e8f0;
+}
+
+.theme-dark .message.assistant .message-avatar {
+    background: #2d3748;
+    color: #e2e8f0;
+}
+
+.theme-dark .message-content {
+    background: #2d3748;
+    color: #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+}
+
+.theme-dark .message-content h1 { font-size: 20px; }
+.theme-dark .message-content h2 { font-size: 18px; }
+.theme-dark .message-content h3 { font-size: 15px; }
+
+.theme-dark .message.user .message-content {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+}
+
+.theme-dark .message-content code {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.theme-dark .message.user .message-content code {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.theme-dark .message-content pre {
+    background: #1a202c;
+}
+
+.theme-dark .message-content blockquote {
+    border-left-color: #4a5568;
+    color: #a0aec0;
+}
+
+.theme-dark .message-footer {
+    background: rgba(255, 255, 255, 0.05);
+    color: #a0aec0;
+}
+
+.theme-dark .input-container {
+    background: #0f0f1e;
+    border-top-color: #2d3748;
+}
+
+.theme-dark .file-upload-btn {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.theme-dark .file-upload-btn:hover {
+    background: #4a5568;
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.theme-dark .file-chip {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+}
+
+.theme-dark .role-label {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.theme-dark .role-selector input[type="radio"]:checked + .role-label {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+    border-color: #667eea;
+}
+
+.theme-dark #messageInput {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.theme-dark #messageInput::placeholder {
+    color: #718096;
+}
+
+.theme-dark #messageInput:focus {
+    border-color: #667eea;
+}
+
+.theme-dark .send-btn {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+}
+
+.theme-dark .send-btn:hover {
+    box-shadow: 0 4px 12px rgba(74, 85, 104, 0.6);
+}
+
+.theme-dark .loading-indicator {
+    background: #667eea;
+}
+
+.theme-dark .message-content.streaming::after {
+    color: #667eea;
+}
+
+.theme-dark .chat-container::-webkit-scrollbar-thumb {
+    background: #4a5568;
+}
+
+.theme-dark .chat-container::-webkit-scrollbar-thumb:hover {
+    background: #718096;
+}
+
+/* Reset button - Dark Theme */
+.theme-dark .reset-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.theme-dark .reset-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Temperature Slider - Dark Theme */
+.theme-dark .stream-toggle-container input[type="range"] {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.theme-dark .stream-toggle-container input[type="range"]::-webkit-slider-thumb {
+    background: white;
+}
+
+.theme-dark .stream-toggle-container input[type="range"]::-webkit-slider-thumb:hover {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+}
+
+.theme-dark .stream-toggle-container input[type="range"]::-moz-range-thumb {
+    background: white;
+}
+
+.theme-dark .stream-toggle-container input[type="range"]::-moz-range-thumb:hover {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+}

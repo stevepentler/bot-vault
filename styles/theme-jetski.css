@@ -1,0 +1,870 @@
+/* ============================================
+   80'S JETSKI THEME
+   ============================================ */
+.theme-jetski body {
+    background: linear-gradient(135deg, #ff006e 0%, #8338ec 50%, #3a86ff 100%);
+    animation: jetskiWave 10s ease-in-out infinite;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 20px; /* Increased base font size */
+}
+
+.theme-jetski .container {
+    background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 100%);
+    border: 3px solid #ff006e;
+    box-shadow: 0 0 30px rgba(255, 0, 110, 0.5), 0 0 60px rgba(131, 56, 236, 0.3);
+}
+
+.theme-jetski .header {
+    background: linear-gradient(135deg, #ff006e 0%, #8338ec 50%, #3a86ff 100%);
+    box-shadow: 0 4px 20px rgba(255, 0, 110, 0.4);
+    border-bottom: 2px solid #00f5ff;
+    padding: 12px 30px; /* Reduced from default 20px */
+}
+
+.theme-jetski .header h1 {
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 28px; /* Reduced from 38px */
+    font-style: italic;
+    text-transform: uppercase;
+    transform: skewX(-5deg);
+    background: repeating-linear-gradient(
+        90deg,
+        #000000 0px,
+        #000000 20px,
+        #ffffff 20px,
+        #ffffff 40px
+    );
+    background-size: 40px 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: checkeredFlag 2s linear infinite;
+    position: relative;
+    text-shadow: none;
+}
+
+.theme-jetski .model-select,
+.theme-jetski .theme-select {
+    background: rgba(0, 245, 255, 0.2);
+    color: #00f5ff;
+    border: 2px solid #00f5ff;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(0, 245, 255, 0.5);
+    font-size: 16px; /* Added larger font size */
+}
+
+.theme-jetski .model-select:hover,
+.theme-jetski .theme-select:hover {
+    background: rgba(0, 245, 255, 0.3);
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.6);
+}
+
+.theme-jetski .stream-toggle-container label {
+    background: rgba(255, 0, 110, 0.2);
+    border: 2px solid rgba(255, 0, 110, 0.4);
+    padding: 0 15px;
+    min-width: 240px;
+    font-size: 14px;
+    height: 40px;
+}
+
+.theme-jetski .stream-toggle-container label:hover {
+    background: rgba(255, 0, 110, 0.3);
+    border-color: rgba(255, 0, 110, 0.6);
+    box-shadow: 0 0 15px rgba(255, 0, 110, 0.4);
+}
+
+/* Stream Toggle - Hammerhead Shark */
+.theme-jetski .stream-toggle-container input[type="checkbox"] {
+    width: 60px;
+    height: 30px;
+    background: transparent;
+    border: 2px solid #00f5ff;
+}
+
+.theme-jetski .stream-toggle-container input[type="checkbox"]::before {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    background-image: url('../images/hammerhead.png');
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    top: -7px;
+    left: -2px;
+    filter: drop-shadow(0 0 8px rgba(0, 245, 255, 0.8));
+    transition: all 0.2s;
+}
+
+.theme-jetski .stream-toggle-container input[type="checkbox"]:hover::before {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 15px rgba(0, 245, 255, 1)) 
+            drop-shadow(0 0 25px rgba(255, 0, 110, 0.6));
+}
+
+.theme-jetski .stream-toggle-container input[type="checkbox"]:checked {
+    background: transparent;
+}
+
+.theme-jetski .stream-toggle-container input[type="checkbox"]:checked::before {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    background-image: url('../images/hammerhead.png');
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    left: 20px;
+    filter: drop-shadow(0 0 8px rgba(0, 245, 255, 0.8));
+    transition: all 0.2s;
+}
+
+.theme-jetski .stream-toggle-container input[type="checkbox"]:checked:hover::before {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 15px rgba(0, 245, 255, 1)) 
+            drop-shadow(0 0 25px rgba(255, 0, 110, 0.6));
+}
+
+.theme-jetski .stream-toggle-container span {
+    font-size: 14px;
+}
+
+.theme-jetski .chat-container {
+    background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 100%);
+    position: relative;
+}
+
+/* Jetski Image Styling */
+.theme-jetski .jetski-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 700px;
+    height: auto;
+    opacity: 0;
+    z-index: 1;
+    filter: blur(3px);
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    border-radius: 20px;
+}
+
+.theme-jetski .jetski-image.show {
+    opacity: 0.6;
+    animation: jetskiWild 6s infinite ease-in-out;
+}
+
+.theme-jetski .jetski-image.faded {
+    opacity: 0.05 !important;
+}
+
+/* ============================================
+   MANTA RAY ANIMATIONS
+   ============================================ */
+.theme-jetski .manta-ray {
+    position: absolute;
+    width: 200px;
+    height: auto;
+    opacity: 0;
+    z-index: 3;
+    pointer-events: none;
+    filter: drop-shadow(0 0 10px rgba(0, 245, 255, 0.6));
+}
+
+.theme-jetski .manta-ray.active {
+    opacity: 0.8;
+}
+
+/* Manta Ray 3 - Enters from bottom left, wiggles, swims to right (one-time) */
+.theme-jetski .manta-ray-3.active {
+    animation: mantaSwimAcross 15s ease-in-out forwards;
+    animation-delay: 3s;
+    opacity: 0; /* Keep hidden until animation starts */
+}
+
+.theme-jetski .welcome-message {
+    color: #00f5ff;
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+    position: relative;
+    z-index: 2;
+    font-size: 22px; /* Added larger font size */
+    transform: translate(-12%, -50%); /* Move left and up */
+}
+
+.theme-jetski .welcome-message h2 {
+    color: #ff006e;
+    text-shadow: 0 0 15px rgba(255, 0, 110, 0.8), 0 0 30px rgba(131, 56, 236, 0.6);
+    font-weight: 700;
+    font-size: 52px; /* Increased from default */
+}
+
+/* Tropical wave animation for jetski welcome message */
+.theme-jetski .welcome-title {
+    animation: tropicalWave 3s ease-in-out infinite;
+    display: block;
+    transform-origin: center;
+}
+
+.theme-jetski .welcome-subtitle {
+    animation: tropicalBounce 2s ease-in-out infinite;
+    display: block;
+}
+
+.theme-jetski .message-group {
+    position: relative;
+    z-index: 2;
+}
+
+.theme-jetski .message.user .message-avatar {
+    background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
+    box-shadow: 0 0 15px rgba(255, 0, 110, 0.6);
+    border: 2px solid #00f5ff;
+}
+
+.theme-jetski .message.assistant .message-avatar {
+    background: linear-gradient(135deg, #00f5ff 0%, #3a86ff 100%);
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.6);
+    border: 2px solid #ff006e;
+}
+
+.theme-jetski .message.system .message-avatar {
+    background: linear-gradient(135deg, #ffbe0b 0%, #fb5607 100%);
+    box-shadow: 0 0 15px rgba(255, 190, 11, 0.6);
+    border: 2px solid #00f5ff;
+}
+
+.theme-jetski .message-content {
+    background: rgba(26, 31, 58, 0.8);
+    color: #ffffff;
+    border: 2px solid rgba(0, 245, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 245, 255, 0.2);
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+/* Apply system fonts to assistant messages for better readability */
+.theme-jetski .message.assistant .message-content {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.theme-jetski .message.user .message-content {
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.3) 0%, rgba(131, 56, 236, 0.3) 100%);
+    color: #ffffff;
+    border-color: #ff006e;
+    box-shadow: 0 4px 15px rgba(255, 0, 110, 0.4);
+    font-size: 16px;
+}
+
+.theme-jetski .message-content code {
+    background: rgba(0, 245, 255, 0.2);
+    color: #00f5ff;
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    font-size: 13px; /* Added smalled font size for inline code */
+}
+
+.theme-jetski .message.user .message-content code {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff; /* Better contrast for user code */
+}
+
+.theme-jetski .message-content pre {
+    background: #0a0e27;
+    border: 2px solid #ff006e;
+    box-shadow: 0 0 10px rgba(255, 0, 110, 0.3);
+    font-size: 16px; /* Added larger font size for code blocks */
+}
+
+.theme-jetski .message-content blockquote {
+    border-left-color: #ff006e;
+    color: #ffffff; /* Changed from #00f5ff to white for better contrast */
+    background: rgba(255, 0, 110, 0.1);
+    font-size: 20px; /* Added larger font size */
+}
+
+.theme-jetski .message-footer {
+    background: rgba(0, 245, 255, 0.1);
+    color: #00f5ff;
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    font-size: 10px; /* Reduced from 16px to 9px - much smaller and less prominent */
+    opacity: 0.7; /* Added reduced opacity to make it even less eye-catching */
+    padding: 6px 10px; /* Reduced padding for more compact appearance */
+}
+
+.theme-jetski .message-footer .footer-item {
+    gap: 3px; /* Tighter spacing between icon and text */
+}
+
+.theme-jetski .input-container {
+    background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 100%);
+    border-top: 2px solid #00f5ff;
+    box-shadow: 0 -4px 20px rgba(0, 245, 255, 0.2);
+}
+
+.theme-jetski .file-upload-btn {
+    background: rgba(0, 245, 255, 0.2);
+    border: 2px solid #00f5ff;
+    color: #00f5ff;
+    font-size: 16px; /* Added larger font size */
+}
+
+.theme-jetski .file-upload-btn:hover {
+    background: rgba(0, 245, 255, 0.3);
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.theme-jetski .file-chip {
+    background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
+    border: 2px solid #00f5ff;
+    box-shadow: 0 0 10px rgba(255, 0, 110, 0.4);
+    font-size: 9px;
+    padding: 4px 10px; /* Slightly reduced padding for more compact look */
+}
+
+.theme-jetski .file-chip button {
+    background: rgba(0, 245, 255, 0.3);
+    width: 16px; /* Slightly smaller button */
+    height: 16px;
+    font-size: 12px; /* Smaller X button */
+}
+
+.theme-jetski .file-chip button:hover {
+    background: rgba(0, 245, 255, 0.6);
+}
+
+.theme-jetski .role-label {
+    background: rgba(0, 245, 255, 0.1);
+    border: 2px solid #00f5ff;
+    color: #00f5ff;
+    font-size: 16px; /* Added larger font size */
+}
+
+.theme-jetski .role-selector input[type="radio"]:checked + .role-label {
+    background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
+    border-color: #00f5ff;
+    box-shadow: 0 0 15px rgba(255, 0, 110, 0.6);
+}
+
+.theme-jetski #messageInput {
+    background: rgba(26, 31, 58, 0.6);
+    border: 2px solid #00f5ff;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.theme-jetski #messageInput::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+}
+
+.theme-jetski #messageInput:focus {
+    border-color: #ff006e;
+    box-shadow: 0 0 15px rgba(255, 0, 110, 0.4);
+}
+
+.theme-jetski .send-btn {
+    background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
+    border: 2px solid #00f5ff;
+    box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+}
+
+.theme-jetski .send-btn:hover {
+    box-shadow: 0 0 30px rgba(255, 0, 110, 0.8), 0 0 40px rgba(131, 56, 236, 0.6);
+    transform: scale(1.1);
+}
+
+.theme-jetski .cancel-btn {
+    background: linear-gradient(135deg, #fb5607 0%, #ff006e 100%);
+    border: 2px solid #00f5ff;
+    box-shadow: 0 0 20px rgba(251, 86, 7, 0.5);
+}
+
+.theme-jetski .cancel-btn:hover {
+    box-shadow: 0 0 30px rgba(251, 86, 7, 0.8), 0 0 40px rgba(255, 0, 110, 0.6);
+}
+
+.theme-jetski .loading-indicator {
+    background: #00f5ff;
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.8);
+}
+
+.theme-jetski .message-content.streaming::after {
+    color: #ff006e;
+    text-shadow: 0 0 10px rgba(255, 0, 110, 0.8);
+}
+
+.theme-jetski .chat-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
+    border: 1px solid #00f5ff;
+}
+
+.theme-jetski .chat-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #8338ec 0%, #3a86ff 100%);
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+}
+
+.theme-jetski .chat-container::-webkit-scrollbar-track {
+    background: rgba(10, 14, 39, 0.5);
+}
+
+/* ============================================
+   LIGHTNING BOLT ANIMATION (Wave Race 64 Style)
+   ============================================ */
+.lightning-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+}
+
+.lightning-container.active {
+    display: flex;
+    animation: flashBackground 2s ease-out;
+}
+
+.lightning-bolt {
+    position: absolute;
+    width: 200px;
+    height: 400px;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.8))
+            drop-shadow(0 0 40px rgba(0, 255, 136, 0.6))
+            drop-shadow(0 0 60px rgba(0, 255, 136, 0.4));
+}
+
+/* Bolt 1 - Center large */
+.lightning-bolt.bolt-1 {
+    width: 250px;
+    height: 500px;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+    animation: boltStrike1 2s ease-out;
+}
+
+/* Bolt 2 - Left side medium */
+.lightning-bolt.bolt-2 {
+    width: 180px;
+    height: 360px;
+    left: 20%;
+    top: 15%;
+    animation: boltStrike2 2s ease-out 0.15s;
+    filter: drop-shadow(0 0 20px rgba(255, 0, 110, 0.8))
+            drop-shadow(0 0 40px rgba(255, 0, 110, 0.6));
+}
+
+/* Bolt 3 - Right side medium */
+.lightning-bolt.bolt-3 {
+    width: 190px;
+    height: 380px;
+    right: 18%;
+    top: 12%;
+    animation: boltStrike3 2s ease-out 0.1s;
+    filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.8))
+            drop-shadow(0 0 40px rgba(0, 245, 255, 0.6));
+}
+
+/* Bolt 4 - Far left small */
+.lightning-bolt.bolt-4 {
+    width: 140px;
+    height: 280px;
+    left: 5%;
+    top: 20%;
+    animation: boltStrike4 2s ease-out 0.3s;
+    filter: drop-shadow(0 0 15px rgba(131, 56, 236, 0.9))
+            drop-shadow(0 0 30px rgba(131, 56, 236, 0.7));
+}
+
+/* Bolt 5 - Far right small */
+.lightning-bolt.bolt-5 {
+    width: 150px;
+    height: 300px;
+    right: 8%;
+    top: 18%;
+    animation: boltStrike5 2s ease-out 0.25s;
+    filter: drop-shadow(0 0 15px rgba(255, 190, 11, 0.9))
+            drop-shadow(0 0 30px rgba(255, 190, 11, 0.7));
+}
+
+/* Bolt 6 - Center left */
+.lightning-bolt.bolt-6 {
+    width: 160px;
+    height: 320px;
+    left: 35%;
+    top: 8%;
+    animation: boltStrike6 2s ease-out 0.2s;
+    filter: drop-shadow(0 0 18px rgba(58, 134, 255, 0.8))
+            drop-shadow(0 0 35px rgba(58, 134, 255, 0.6));
+}
+
+/* Bolt 7 - Center right */
+.lightning-bolt.bolt-7 {
+    width: 170px;
+    height: 340px;
+    right: 32%;
+    top: 5%;
+    animation: boltStrike7 2s ease-out 0.35s;
+    filter: drop-shadow(0 0 18px rgba(251, 86, 7, 0.8))
+            drop-shadow(0 0 35px rgba(251, 86, 7, 0.6));
+}
+
+/* Bolt 8 - Extra center bolt for maximum chaos */
+.lightning-bolt.bolt-8 {
+    width: 220px;
+    height: 440px;
+    left: 50%;
+    top: 15%;
+    transform: translateX(-50%);
+    animation: boltStrike8 2s ease-out 0.4s;
+    filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.9))
+            drop-shadow(0 0 50px rgba(0, 255, 136, 0.7));
+}
+
+.bolt-path {
+    fill: #00FF88;
+    stroke: #FFFFFF;
+    stroke-width: 1;
+    animation: boltGlow 2s ease-out;
+}
+
+.bolt-2 .bolt-path {
+    fill: #FF006E;
+    stroke: #FFFFFF;
+    animation: boltGlowPink 2s ease-out 0.15s;
+}
+
+.bolt-3 .bolt-path {
+    fill: #00F5FF;
+    stroke: #FFFFFF;
+    animation: boltGlowCyan 2s ease-out 0.1s;
+}
+
+.bolt-4 .bolt-path {
+    fill: #8338EC;
+    stroke: #FFFFFF;
+    animation: boltGlowPurple 2s ease-out 0.3s;
+}
+
+.bolt-5 .bolt-path {
+    fill: #FFBE0B;
+    stroke: #FFFFFF;
+    animation: boltGlowYellow 2s ease-out 0.25s;
+}
+
+.bolt-6 .bolt-path {
+    fill: #3A86FF;
+    stroke: #FFFFFF;
+    animation: boltGlowBlue 2s ease-out 0.2s;
+}
+
+.bolt-7 .bolt-path {
+    fill: #FB5607;
+    stroke: #FFFFFF;
+    animation: boltGlowOrange 2s ease-out 0.35s;
+}
+
+.bolt-8 .bolt-path {
+    fill: #FFFFFF;
+    stroke: #00FF88;
+    stroke-width: 2;
+    animation: boltGlowWhite 2s ease-out 0.4s;
+}
+
+/* Jetski theme - show lightning on load */
+.theme-jetski .lightning-container.show-on-load {
+    display: flex;
+}
+
+/* Reset button - Jetski Theme */
+.theme-jetski .reset-btn {
+    background: rgba(255, 0, 110, 0.2);
+    border: 2px solid #ff006e;
+    font-size: 14px;
+    text-shadow: 0 0 5px rgba(255, 0, 110, 0.5);
+    box-shadow: 0 0 10px rgba(255, 0, 110, 0.3);
+}
+
+.theme-jetski .reset-btn:hover {
+    background: rgba(255, 0, 110, 0.3);
+    border-color: #00f5ff;
+    box-shadow: 0 0 20px rgba(255, 0, 110, 0.6), 0 0 30px rgba(0, 245, 255, 0.4);
+    text-shadow: 0 0 10px rgba(255, 0, 110, 0.8);
+}
+
+/* Temperature Slider - Hammerhead Thumb */
+.theme-jetski .stream-toggle-container input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 120px;
+    height: 6px;
+    background: rgba(0, 245, 255, 0.3);
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #00f5ff;
+}
+
+.theme-jetski .stream-toggle-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 40px;
+    height: 40px;
+    background-image: url('../images/hammerhead.png');
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    border: none;
+    filter: drop-shadow(0 0 8px rgba(0, 245, 255, 0.8));
+    transition: all 0.2s;
+}
+
+.theme-jetski .stream-toggle-container input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 15px rgba(0, 245, 255, 1)) 
+            drop-shadow(0 0 25px rgba(255, 0, 110, 0.6));
+}
+
+.theme-jetski .stream-toggle-container input[type="range"]::-moz-range-thumb {
+    width: 40px;
+    height: 40px;
+    background-image: url('../images/hammerhead.png');
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
+    filter: drop-shadow(0 0 8px rgba(0, 245, 255, 0.8));
+    transition: all 0.2s;
+}
+
+.theme-jetski .stream-toggle-container input[type="range"]::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 15px rgba(0, 245, 255, 1)) 
+            drop-shadow(0 0 25px rgba(255, 0, 110, 0.6));
+}
+
+.theme-jetski .temperature-container label {
+    background: rgba(255, 0, 110, 0.2);
+    border: 2px solid rgba(255, 0, 110, 0.4);
+    padding: 0 15px;
+    min-width: 280px;
+    font-size: 14px;
+    height: 40px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: center;
+}
+
+.theme-jetski .temperature-container label:hover {
+    background: rgba(255, 0, 110, 0.3);
+    border-color: rgba(255, 0, 110, 0.6);
+    box-shadow: 0 0 15px rgba(255, 0, 110, 0.4);
+}
+
+.theme-jetski .temperature-container .temp-label {
+    order: 1;
+}
+
+.theme-jetski .temperature-container .temp-value {
+    order: 3;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* ============================================
+   UNDERWATER BUBBLE EFFECTS
+   ============================================ */
+
+/* Link notifications - Jetski Theme - Compact and Vibrant */
+.theme-jetski .link-notification {
+    background: linear-gradient(135deg, rgba(26, 31, 58, 0.95) 0%, rgba(10, 14, 39, 0.98) 100%);
+    border: 2px solid #00f5ff;
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.6), 0 4px 16px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    max-width: 320px;
+    border-radius: 8px;
+}
+
+.theme-jetski .link-notification-text {
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.theme-jetski .link-notification-text strong {
+    color: #00f5ff;
+    text-shadow: 0 0 8px rgba(0, 245, 255, 0.6);
+    font-size: 13px;
+}
+
+.theme-jetski .link-notification-url {
+    background: rgba(0, 245, 255, 0.1);
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    color: #00f5ff;
+    font-size: 10px;
+    padding: 4px 6px;
+}
+
+.theme-jetski .link-notification-hint {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 10px;
+}
+
+.theme-jetski .link-notification-icon {
+    font-size: 18px;
+    filter: drop-shadow(0 0 8px rgba(0, 245, 255, 0.6));
+}
+
+/* Responsive adjustments for Jetski theme */
+@media screen and (max-width: 1024px) {
+    .theme-jetski .link-notification {
+        max-width: 280px;
+        padding: 8px;
+    }
+    
+    .theme-jetski .link-notification-text {
+        font-size: 11px;
+    }
+    
+    .theme-jetski .link-notification-text strong {
+        font-size: 12px;
+    }
+    
+    .theme-jetski .link-notification-url {
+        font-size: 9px;
+        padding: 3px 5px;
+    }
+    
+    .theme-jetski .link-notification-hint {
+        font-size: 9px;
+    }
+    
+    .theme-jetski .link-notification-icon {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .theme-jetski .link-notification {
+        max-width: calc(100% - 30px);
+        padding: 6px 8px;
+        left: 15px !important;
+        right: 15px !important;
+        bottom: 75px !important;
+    }
+    
+    .theme-jetski .link-notification-text {
+        font-size: 10px;
+    }
+    
+    .theme-jetski .link-notification-text strong {
+        font-size: 11px;
+    }
+    
+    .theme-jetski .link-notification-url {
+        font-size: 8px;
+        padding: 2px 4px;
+    }
+    
+    .theme-jetski .link-notification-hint {
+        font-size: 8px;
+    }
+    
+    .theme-jetski .link-notification-icon {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .theme-jetski .link-notification {
+        padding: 5px 7px;
+        bottom: 65px !important;
+    }
+    
+    .theme-jetski .link-notification-text {
+        font-size: 9px;
+    }
+    
+    .theme-jetski .link-notification-text strong {
+        font-size: 10px;
+    }
+    
+    .theme-jetski .link-notification-url {
+        font-size: 7px;
+        padding: 2px 3px;
+    }
+    
+    .theme-jetski .link-notification-hint {
+        font-size: 7px;
+    }
+    
+    .theme-jetski .link-notification-icon {
+        font-size: 12px;
+    }
+}
+
+/* Bubble container that spawns on interaction */
+.bubble-container {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.bubble {
+    position: absolute;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 245, 255, 0.8), rgba(58, 134, 255, 0.4));
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 
+        inset -5px -5px 10px rgba(0, 245, 255, 0.3),
+        inset 5px 5px 10px rgba(255, 255, 255, 0.5),
+        0 0 10px rgba(0, 245, 255, 0.6);
+    animation: floatUp 2s ease-out forwards;
+    opacity: 0;
+}
+
+/* Bubble variants for variety */
+.bubble.bubble-wobble {
+    animation: floatUpWobble 2s ease-out forwards;
+}
+
+.bubble.bubble-spiral {
+    animation: floatUpSpiral 2s ease-out forwards;
+}
+
+/* Add glow effect to controls when active */
+.theme-jetski .stream-toggle-container input[type="checkbox"]:active,
+.theme-jetski .stream-toggle-container input[type="range"]:active {
+    filter: drop-shadow(0 0 20px rgba(0, 245, 255, 1)) 
+            drop-shadow(0 0 40px rgba(58, 134, 255, 0.8));
+}
+
+.theme-jetski .model-select:active,
+.theme-jetski .theme-select:active {
+    box-shadow: 0 0 25px rgba(0, 245, 255, 0.9), 0 0 50px rgba(58, 134, 255, 0.6);
+}

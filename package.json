@@ -1,0 +1,68 @@
+{
+  "name": "bot-vault",
+  "version": "1.0.0",
+  "description": "Local chatbot powered by Ollama - Airgapped Electron App",
+  "main": "main.js",
+  "type": "commonjs",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevepentler/bot-vault.git"
+  },
+  "keywords": [
+    "ollama",
+    "chatbot",
+    "electron",
+    "airgapped",
+    "local-ai"
+  ],
+  "author": "stevepentler",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stevepentler/bot-vault/issues"
+  },
+  "homepage": "https://github.com/stevepentler/bot-vault#readme",
+  "devDependencies": {
+    "electron": "^39.2.7",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "dompurify": "^3.2.2",
+    "marked": "^17.0.0"
+  },
+  "build": {
+    "appId": "bot-vault",
+    "productName": "Bot Vault",
+    "files": [
+      "main.js",
+      "index.html",
+      "script.js",
+      "modules/**/*",
+      "styles/**/*",
+      "images/**/*",
+      "music/**/*",
+      "node_modules/marked/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "images/hammerhead.png"
+    },
+    "win": {
+      "icon": "images/hammerhead.png"
+    },
+    "linux": {
+      "category": "Utility"
+    }
+  }
+}
