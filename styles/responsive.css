@@ -3,6 +3,37 @@
    Mobile and Tablet optimizations
    ============================================ */
 
+/* Base responsive fixes for all screen sizes */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 100vw;
+    width: 100%;
+}
+
+.input-container {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.input-row {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+#messageInput {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 /* Tablet and smaller devices (1024px and below) */
 @media screen and (max-width: 1024px) {
     /* Hide non-essential controls */
@@ -21,8 +52,8 @@
     
     .header h1 {
         font-size: 20px;
-        width: 100%;
-        margin-bottom: 8px;
+        width: auto; /* Don't force full width */
+        margin-bottom: 0;
     }
     
     /* Selectors full width */
@@ -106,43 +137,125 @@
 
 /* Mobile phones (768px and below) */
 @media screen and (max-width: 768px) {
+    /* Force proper viewport constraints */
+    html, body {
+        width: 100%;
+        overflow-x: hidden;
+        position: relative;
+    }
+    
+    .container {
+        width: 100vw;
+        max-width: 100vw;
+    }
+    
     .header {
-        padding: 12px 15px;
-        gap: 10px;
+        padding: 10px 12px;
+        gap: 8px;
+        width: 100%;
+        box-sizing: border-box;
+        flex-wrap: nowrap; /* Keep everything in one row */
+        overflow-x: auto; /* Allow horizontal scroll if needed */
     }
     
     .header h1 {
-        font-size: 18px;
-        margin-bottom: 6px;
+        font-size: 16px;
+        margin-bottom: 0;
+        white-space: nowrap;
+        flex-shrink: 0;
     }
     
     .model-selector-container,
     .theme-selector-container {
-        font-size: 13px;
+        font-size: 12px;
+        flex-shrink: 1;
+        min-width: 100px;
+    }
+    
+    .model-selector-container label,
+    .theme-selector-container label {
+        display: none; /* Hide labels to save space */
     }
     
     .model-select,
     .theme-select {
-        font-size: 13px;
-        padding: 6px 12px;
-        height: 36px;
+        font-size: 12px;
+        padding: 5px 8px;
+        height: 32px;
+        width: 100%;
     }
     
     .reset-btn {
         padding: 6px 10px;
-        font-size: 12px;
+        font-size: 11px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .reset-btn svg {
+        width: 14px;
+        height: 14px;
+        margin-right: 2px;
     }
     
     .reset-btn span {
-        display: none;
+        display: inline; /* Show text on mobile */
     }
     
     .chat-container {
         padding: 15px 12px;
+        width: 100%;
+        box-sizing: border-box;
     }
     
+    /* Critical: Fix input container overflow */
     .input-container {
         padding: 12px 15px;
+        width: 100%;
+        max-width: 100vw;
+        box-sizing: border-box;
+    }
+    
+    .file-upload-area {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Critical: Fix input row to prevent overflow */
+    .input-row {
+        display: flex;
+        gap: 8px;
+        align-items: flex-end;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    #messageInput {
+        flex: 1;
+        min-width: 0; /* Critical: allows flex item to shrink below content size */
+        width: 100%;
+        max-width: 100%;
+        font-size: 16px; /* 16px minimum prevents iOS zoom on focus */
+        padding: 10px 14px;
+        min-height: 50px;
+        box-sizing: border-box;
+        touch-action: manipulation; /* Prevents double-tap zoom */
+    }
+    
+    /* Ensure buttons don't cause overflow */
+    .send-btn,
+    .cancel-btn {
+        flex-shrink: 0; /* Prevent buttons from shrinking */
+        width: 44px;
+        height: 44px;
+    }
+    
+    .send-btn svg,
+    .cancel-btn svg {
+        width: 20px;
+        height: 20px;
     }
     
     .welcome-message {
@@ -156,6 +269,8 @@
     .message-content {
         font-size: 12px;
         padding: 12px 14px;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     
     .message-avatar {
@@ -172,24 +287,6 @@
     .file-upload-btn svg {
         width: 18px;
         height: 18px;
-    }
-    
-    #messageInput {
-        font-size: 14px;
-        padding: 10px 14px;
-        min-height: 50px;
-    }
-    
-    .send-btn,
-    .cancel-btn {
-        width: 44px;
-        height: 44px;
-    }
-    
-    .send-btn svg,
-    .cancel-btn svg {
-        width: 20px;
-        height: 20px;
     }
     
     .link-notification {
@@ -233,25 +330,70 @@
 
 /* Extra small phones (480px and below) */
 @media screen and (max-width: 480px) {
-    .header h1 {
-        font-size: 16px;
+    .header {
+        padding: 8px 10px;
+        gap: 6px;
     }
     
-    .model-selector-container label,
-    .theme-selector-container label {
-        display: none;
+    .header h1 {
+        font-size: 14px;
+    }
+    
+    .model-selector-container,
+    .theme-selector-container {
+        min-width: 90px;
     }
     
     .model-select,
     .theme-select {
-        font-size: 12px;
-        padding: 5px 10px;
-        height: 32px;
+        font-size: 11px;
+        padding: 4px 6px;
+        height: 28px;
+    }
+    
+    .reset-btn {
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+    
+    .reset-btn svg {
+        width: 12px;
+        height: 12px;
+    }
+    
+    /* Critical: Tighter spacing on small screens */
+    .input-container {
+        padding: 10px 12px;
+    }
+    
+    .input-row {
+        gap: 6px;
+    }
+    
+    #messageInput {
+        font-size: 16px; /* 16px minimum prevents iOS zoom on focus */
+        padding: 8px 12px;
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+    
+    .send-btn,
+    .cancel-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .send-btn svg,
+    .cancel-btn svg {
+        width: 18px;
+        height: 18px;
     }
     
     .file-upload-btn {
         width: 100%;
         justify-content: center;
+        padding: 8px 12px;
+        font-size: 12px;
     }
     
     .file-list {

@@ -1,11 +1,21 @@
 const { app, BrowserWindow, session, ipcMain, clipboard } = require('electron');
+const path = require('path');
+const { LAN_ACCESS_MODE } = require('./config');
+
 // IPC handler for secure clipboard copy from renderer
 ipcMain.on('copy-to-clipboard', (event, text) => {
     if (typeof text === 'string') {
         clipboard.writeText(text);
     }
 });
-const path = require('path');
+
+// Log current mode on startup
+console.log('='.repeat(60));
+console.log('Bot Vault - Electron Desktop App');
+console.log('='.repeat(60));
+console.log(`Mode: ${LAN_ACCESS_MODE ? '🔓 LAN Access Enabled' : '🔒 Airgapped (localhost only)'}`);
+console.log('='.repeat(60));
+console.log('');
 
 // Suppress CoreText font warnings on macOS
 app.commandLine.appendSwitch('disable-font-subpixel-positioning');
@@ -97,20 +107,21 @@ function createWindow() {
         });
     });
 
-    // Block all external network requests (airgap the application)
+    // Block all external network requests
     session.defaultSession.webRequest.onBeforeRequest({ urls: ['*://*/*'] }, (details, callback) => {
         const url = details.url;
         
-        // Allow only localhost connections (for Ollama API)
+        // Allow localhost connections (for Ollama API)
         if (url.startsWith('http://localhost:') || 
             url.startsWith('http://127.0.0.1:') ||
             url.startsWith('file://')) {
             callback({ cancel: false });
-        } else {
-            // Block all other external requests
-            console.log('Blocked external request:', url);
-            callback({ cancel: true });
+            return;
         }
+        
+        // Block all other external requests
+        console.log('Blocked external request:', url);
+        callback({ cancel: true });
     });
 
     // Load the index.html file with error handling

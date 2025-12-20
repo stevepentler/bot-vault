@@ -19,6 +19,11 @@
     box-shadow: 0 4px 20px rgba(255, 0, 110, 0.4);
     border-bottom: 2px solid #00f5ff;
     padding: 12px 30px; /* Reduced from default 20px */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    flex-wrap: nowrap;
 }
 
 .theme-jetski .header h1 {
@@ -42,6 +47,25 @@
     animation: checkeredFlag 2s linear infinite;
     position: relative;
     text-shadow: none;
+    white-space: nowrap; /* keep title on one line */
+    min-width: 0; /* allow flexbox to shrink without overflow */
+    flex: 0 1 auto;
+}
+
+/* Always use flex containers for selectors in Jetski theme */
+.theme-jetski .model-selector-container,
+.theme-jetski .theme-selector-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+}
+
+/* Ensure controls stay as fixed-size pills in the header row */
+.theme-jetski .model-select,
+.theme-jetski .theme-select,
+.theme-jetski .reset-btn {
+    flex: 0 0 auto;
 }
 
 .theme-jetski .model-select,
@@ -738,6 +762,35 @@
 
 /* Responsive adjustments for Jetski theme */
 @media screen and (max-width: 1024px) {
+    /* Keep header in one row with tighter spacing */
+    .theme-jetski .header {
+        padding: 10px 16px;
+        gap: 10px;
+        flex-wrap: nowrap;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    .theme-jetski .header h1 {
+        font-size: 20px;
+        letter-spacing: 1px;
+        white-space: nowrap;
+    }
+
+    .theme-jetski .model-select,
+    .theme-jetski .theme-select {
+        font-size: 14px;
+        padding: 6px 10px;
+        min-width: 120px;
+    }
+
+    .theme-jetski .reset-btn {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+
     .theme-jetski .link-notification {
         max-width: 280px;
         padding: 8px;
@@ -766,6 +819,46 @@
 }
 
 @media screen and (max-width: 768px) {
+    /* Even tighter for small phones */
+    .theme-jetski .header {
+        padding: 8px 12px;
+        gap: 6px; /* tighter spacing to free room for title */
+        flex-wrap: nowrap;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    .theme-jetski .model-selector-container,
+    .theme-jetski .theme-selector-container {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-right: 0; /* reclaim horizontal space */
+        min-width: 0;
+    }
+
+    .theme-jetski .header h1 {
+        font-size: 16px;
+        letter-spacing: 0.75px;
+        white-space: nowrap;
+    }
+
+    .theme-jetski .model-select,
+    .theme-jetski .theme-select {
+        font-size: 11px;
+        padding: 5px 9px;
+        min-width: 105px;
+    }
+
+    .theme-jetski .reset-btn {
+        font-size: 11px;
+        padding: 5px 9px;
+        white-space: nowrap;
+        margin-left: 2px; /* smaller offset from theme selector */
+    }
+
     .theme-jetski .link-notification {
         max-width: calc(100% - 30px);
         padding: 6px 8px;
@@ -797,6 +890,46 @@
 }
 
 @media screen and (max-width: 480px) {
+    /* Smallest screens: compact everything */
+    .theme-jetski .header {
+        padding: 6px 10px;
+        gap: 4px; /* even tighter spacing to fit within viewport */
+        flex-wrap: nowrap;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    .theme-jetski .model-selector-container,
+    .theme-jetski .theme-selector-container {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        margin-right: 0; /* remove extra spacing */
+        min-width: 0;
+    }
+
+    .theme-jetski .header h1 {
+        font-size: 14px;
+        letter-spacing: 0.25px; /* tighter tracking to fit text */
+        white-space: nowrap;
+    }
+
+    .theme-jetski .model-select,
+    .theme-jetski .theme-select {
+        font-size: 10px;
+        padding: 4px 8px;
+        min-width: 84px; /* further narrow theme selection */
+    }
+
+    .theme-jetski .reset-btn {
+        font-size: 10px;
+        padding: 4px 8px;
+        white-space: nowrap;
+        margin-left: 2px;
+    }
+
     .theme-jetski .link-notification {
         padding: 5px 7px;
         bottom: 65px !important;
