@@ -157,7 +157,6 @@ export function displayMessage(role, content, files = null) {
     }
     
     dom.chatContainer.appendChild(messageGroup);
-    scrollToBottom();
 }
 
 // Create a message group for streaming responses
@@ -219,7 +218,6 @@ async function streamChatResponse(messageGroup) {
                 styleExternalLinks(messageContent); // Add visual indicators to external links
                 lastRenderTime = Date.now();
                 renderScheduled = false;
-                scrollToBottom();
             });
         }
     };
@@ -261,7 +259,6 @@ async function streamChatResponse(messageGroup) {
     messageContent.innerHTML = DOMPurify.sanitize(rawHTML);
     styleExternalLinks(messageContent); // Add visual indicators to external links
     messageContent.classList.remove('streaming');
-    scrollToBottom();
     
     // Add assistant message to history (only if not cancelled or if there's content)
     if (accumulatedContent.trim()) {

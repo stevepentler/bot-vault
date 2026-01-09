@@ -611,6 +611,8 @@ body {
 /* Streaming text animations */
 .message-content.streaming {
     animation: fadeInContent 0.2s ease-out;
+    max-height: 60vh;
+    overflow-y: auto;
 }
 
 @keyframes fadeInContent {
