@@ -88,7 +88,7 @@ export function loadThemePreference() {
     
     if (savedTheme === 'jetski') {
         triggerLightningAnimation();
-        
+
         const jetskiAudio = document.getElementById('jetskiAudio');
         if (jetskiAudio) {
             setTimeout(() => {
@@ -103,8 +103,53 @@ export function loadThemePreference() {
     }
 }
 
+// Create jetski elements if they don't exist
+function ensureJetskiElements() {
+    if (!document.getElementById('lightningContainer')) {
+        const lightningHTML = `
+            <div class="lightning-container" id="lightningContainer">
+                <svg class="lightning-bolt bolt-1" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                    <path class="bolt-path" d="M 50 0 L 35 75 L 55 75 L 30 150 L 70 80 L 50 80 L 65 25 Z" />
+                </svg>
+                <svg class="lightning-bolt bolt-2" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                    <path class="bolt-path" d="M 50 0 L 35 75 L 55 75 L 30 150 L 70 80 L 50 80 L 65 25 Z" />
+                </svg>
+                <svg class="lightning-bolt bolt-3" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                    <path class="bolt-path" d="M 50 0 L 35 75 L 55 75 L 30 150 L 70 80 L 50 80 L 65 25 Z" />
+                </svg>
+                <svg class="lightning-bolt bolt-4" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                    <path class="bolt-path" d="M 50 0 L 35 75 L 55 75 L 30 150 L 70 80 L 50 80 L 65 25 Z" />
+                </svg>
+                <svg class="lightning-bolt bolt-5" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                    <path class="bolt-path" d="M 50 0 L 35 75 L 55 75 L 30 150 L 70 80 L 50 80 L 65 25 Z" />
+                </svg>
+                <svg class="lightning-bolt bolt-6" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                    <path class="bolt-path" d="M 50 0 L 35 75 L 55 75 L 30 150 L 70 80 L 50 80 L 65 25 Z" />
+                </svg>
+                <svg class="lightning-bolt bolt-7" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                    <path class="bolt-path" d="M 50 0 L 35 75 L 55 75 L 30 150 L 70 80 L 50 80 L 65 25 Z" />
+                </svg>
+                <svg class="lightning-bolt bolt-8" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                    <path class="bolt-path" d="M 50 0 L 35 75 L 55 75 L 30 150 L 70 80 L 50 80 L 65 25 Z" />
+                </svg>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('afterbegin', lightningHTML);
+    }
+    
+    if (!document.getElementById('jetskiAudio')) {
+        const audioHTML = `
+            <audio id="jetskiAudio">
+                <source src="music/WaveRaceMainTitle.mp3" type="audio/mpeg">
+            </audio>
+        `;
+        document.body.insertAdjacentHTML('beforeend', audioHTML);
+    }
+}
+
 // Trigger lightning animation sequence
 export function triggerLightningAnimation() {
+    ensureJetskiElements();
     const lightningContainer = document.getElementById('lightningContainer');
     lightningContainer.classList.add('active');
     

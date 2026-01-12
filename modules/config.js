@@ -1,6 +1,11 @@
 // Configuration constants
-export const API_URL = 'http://localhost:11434/api/chat';
-export const TAGS_API_URL = 'http://localhost:11434/api/tags';
+const isBrowser = typeof window !== 'undefined';
+const isElectronRenderer = isBrowser && !!window.electronAPI;
+
+// In Electron: use localhost directly; in browser/LAN mode: use proxied /ollama
+export const API_BASE_URL = isElectronRenderer ? 'http://localhost:11434' : '/ollama';
+export const API_URL = `${API_BASE_URL}/api/chat`;
+export const TAGS_API_URL = `${API_BASE_URL}/api/tags`;
 
 export const DEFAULT_MODEL = 'gemma3:4b';
 export const DEFAULT_STREAM_ENABLED = true;
@@ -12,7 +17,7 @@ export const MAX_FILE_COUNT = 10; // Maximum number of files
 export const REQUEST_TIMEOUT_MS = 120000; // 2 minutes timeout for API requests
 
 export const THEME_STORAGE_KEY = 'bot-vault-theme';
-export const DEFAULT_THEME = 'no-fun';
+export const DEFAULT_THEME = 'dark';
 
 export const AVATARS = {
     user: '💀',

@@ -1,13 +1,13 @@
-# Bot Vault's - Airgapped Desktop App
-Local chatbot powered by Ollama - **Fully Airgapped Electron Application**
+# Bot Vault's - Desktop App
+Local chatbot powered by Ollama - **✌"Airgapped"✌ Electron Application**
 
-> **Disclaimer:** While this application is designed with airgap principles and privacy in mind, there is **no absolute guarantee** that it is fully airgapped or immune to all data leaks. This is an attempt to provide strong local privacy, but users should independently verify and take additional precautions as needed for sensitive environments.
+> **Disclaimer:** While this application is designed with airgap principles and privacy in mind, there is **no absolute guarantee** that it is fully airgapped or immune to all data leaks. Computers connected to the internet are inherently impossible to airgap. This is an attempt to provide strong local privacy, but users should independently verify and take additional precautions as needed for sensitive environments.
 
 ## Overview
 
 Bot Vault is a **desktop application** for interacting with local Large Language Models (LLMs) through Ollama. Built with Electron, it provides a modern, feature-rich UI for conversational AI without requiring cloud services, API keys, or external internet connectivity. The app is designed to be airgapped, but see the disclaimer above.
 
-### 🔒 Airgap Security
+### 🔒 ✌"Airgap-like"✌ Security
 
 
 This application attempts to be airgapped and blocks all external network requests at the Electron session level. Your data is intended to stay on your local machine, but absolute airgap cannot be guaranteed (see disclaimer above).
@@ -66,7 +66,7 @@ See the `preload.js` file for details and only add new APIs with care.
 - Persistent window state and preferences
 - System-level integration with native UI
 
-> **Browser mode is available for convenience and development, but is not recommended for secure or airgapped use.**
+> **Browser mode is available for convenience and development, but is not recommended for secure or ✌"airgapped"✌ use.**
 
 ## What is Ollama?
 
@@ -203,15 +203,240 @@ You should see a JSON response with your installed models.
 
 ### 5. Launch the Desktop Application
 
+**Option A: ✌"Airgapped"✌ Mode (Default - Most Secure)**
 ```bash
 npm start
 ```
+The Electron app will open as a native desktop window. The application runs in ✌"airgapped"✌ mode with localhost-only access.
 
-The Electron app will open as a native desktop window. The application is now running in a completely airgapped environment.
+**Option B: LAN Access Mode (Local Netork)**
+```bash
+npm run start:lan
+# or
+LAN_ACCESS_MODE=true npm start
+```
+The Electron app will open with local network access enabled. You can access the app from other devices on your home network.
+
+**Option C: Web Server Mode (Browser Access on LAN)**
+```bash
+npm run server
+```
+Starts an Express web server accessible from any device on your local network via browser on port 4311. See [Local Network Access](#local-network-access-lan) section below for details.
+
+---
+
+## Local Network Access (LAN)
+
+Bot Vault supports **LAN Access Mode** to make the app accessible from other devices on your home network (phones, tablets, other computers) while maintaining strong security by blocking all external traffic.
+
+### 🔒 Security Model
+
+**LAN_ACCESS_MODE=false (Default - ✌"Airgapped"✌)**
+- ✅ Localhost only (`127.0.0.1`, `localhost`)
+- ❌ All other connections blocked
+- 🔒 Most secure mode
+
+**LAN_ACCESS_MODE=true (Local Network)**
+- ✅ Localhost allowed
+- ✅ Specific LAN IP allowed (`192.168.7.192`)
+- ❌ All external/public IPs blocked
+- ❌ Internet access disabled
+- 🏠 Suitable for home network access
+
+### Running in LAN Mode
+
+#### Method 1: Electron Desktop App (LAN Mode)
+
+Start the Electron app with LAN access enabled:
+
+```bash
+npm run start:lan
+```
+
+Or with environment variable:
+```bash
+LAN_ACCESS_MODE=true npm start
+```
+
+The app window will open on your computer.
+
+#### Method 2: Web Server (Browser Access)
+
+Start the Express web server to access Bot Vault from a browser on any device:
+
+```bash
+npm run server
+```
+
+The server will display your local network address. For example:
+```
+============================================================
+Bot Vault - Local Network Server
+============================================================
+🚀 Server running on:
+   Local:   http://localhost:4311
+   Network: http://192.168.7.192:4311
+============================================================
+📱 Access from other devices: http://192.168.7.192:4311
+============================================================
+🔒 Security Configuration:
+   ✅ IP Whitelist: 192.168.7.192
+   ✅ Request Logging: Enabled (access.log)
+   ✅ CORS: Restricted to same-origin
+============================================================
+```
+
+**Ollama connectivity:** The LAN server proxies Ollama at `/ollama`, so Ollama stays bound to `localhost:11434`. Browser clients call `http://192.168.7.192:4311/ollama/...` and the server forwards securely to localhost.
+
+### Accessing from Other Devices
+
+Once the server is running:
+
+1. **On the computer running Bot Vault:** Note the Network IP address shown (e.g., `192.168.7.192`)
+
+2. **On your phone/tablet/other computer:** 
+   - Connect to the **same WiFi network**
+   - Open a web browser
+   - Navigate to `http://192.168.7.192:4311`
+
+3. **Start chatting!** All conversations happen locally on your network.
+
+### Hostname Alias (macOS /etc/hosts)
+
+You can add a friendly hostname so you can visit the app at `http://botvault:4311` instead of typing the IP. Note: `/etc/hosts` only maps hostnames to IPs — it cannot alias a port. You will still include `:4311` in the URL.
+
+Replace `192.168.7.192` below with your machine’s LAN IP if different.
+
+1) Backup and append mapping
+
+```bash
+sudo cp /etc/hosts /etc/hosts.backup.$(date +%Y%m%d-%H%M%S)
+echo "192.168.7.192 botvault" | sudo tee -a /etc/hosts
+```
+
+2) Flush DNS cache (macOS)
+
+```bash
+sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
+```
+
+3) Test the hostname and access the app
+
+```bash
+ping -c 2 botvault
+curl http://botvault:4311
+# or open in a browser
+open http://botvault:4311
+```
+
+Optional (quality‑of‑life): create a shell alias to open the app quickly from Terminal:
+
+```bash
+echo "alias botvault='open http://botvault:4311'" >> ~/.zshrc && source ~/.zshrc
+# Now you can just run:
+botvault
+```
+
+### Security Considerations
+
+✅ **Built-in Security Features:**
+- **Request Logging:** All access logged to `access.log`
+- **CORS Protection:** Restricted to same-origin requests only
+- **Ollama Isolation:** Stays on localhost, never exposed to network
+
+⚠️ **Important Notes:**
+- Only use on your **trusted home network**
+- Don't use on public WiFi or untrusted networks
+- Ensure your router firewall blocks external access to port 4311
+
+🔒 **IP Whitelist Security:**
+
+By default, when `ALLOWED_IPS` is not set, **all LAN devices can access** the server.
+
+**To restrict access to specific IP addresses (recommended):**
+
+```bash
+# Single IP
+ALLOWED_IPS=192.168.7.192 npm run server
+
+# Multiple IPs (comma-separated)
+ALLOWED_IPS=192.168.7.192,192.168.7.237 npm run server
+
+# Using the secure script (from package.json)
+npm run server:secure  # Restricts to 192.168.7.192
+```
+
+**To allow all LAN devices (default, less secure):**
+```bash
+# Omit ALLOWED_IPS entirely
+npm run server
+# or
+LAN_ACCESS_MODE=true node server.js
+```
+
+#### **Security Example**
+
+With IP whitelist enabled:
+
+```bash
+ALLOWED_IPS=192.168.7.192 npm run server
+```
+
+This restricts access to:
+- ✅ Only IP address 192.168.7.192
+- ✅ All requests logged for audit
+- ✅ CORS restricted to same-origin
+
+### Security Status Display
+
+When the server starts, it displays your active security configuration:
+
+**With IP Whitelist enabled:**
+```
+============================================================
+🔒 Security Configuration:
+   ✅ IP Whitelist: 192.168.7.192
+   ✅ Request Logging: Enabled (access.log)
+   ✅ CORS: Restricted to same-origin
+============================================================
+```
+
+**Without IP Whitelist (default):**
+```
+============================================================
+🔒 Security Configuration:
+   ⚠️  IP Whitelist: Disabled (all LAN IPs allowed)
+   ✅ Request Logging: Enabled (access.log)
+   ✅ CORS: Restricted to same-origin
+============================================================
+```
+
+🔒 **For Maximum Security:**
+- Use airgapped mode (`npm start`) when not needing LAN access
+- **Always configure IP whitelist** (`ALLOWED_IPS`) when using LAN mode to restrict access
+- Use `npm run server:secure` for quick secure setup with single IP
+- Only enable LAN mode when actively using from other devices
+- Review `access.log` periodically for unauthorized access attempts
+
+### Development Mode (Both Server + Desktop)
+
+Run both the web server and Electron app simultaneously:
+
+```bash
+npm run dev
+```
+
+This starts:
+- Express server on `http://192.168.7.192:4311` (LAN accessible)
+- Electron desktop window (LAN mode enabled)
+
+Useful for development and testing LAN access.
+
+---
 
 ## Alternative: Running in a Browser (Less Secure)
 
-⚠️ **Important**: Running the application in a browser provides **reduced airgap protection** compared to the Electron desktop app. This method is technically functional but **not recommended** for security-sensitive use cases.
+⚠️ **Important**: Running the application in a browser provides **reduced ✌airgap✌ protection** compared to the Electron desktop app. This method is technically functional but **not recommended** for security-sensitive use cases.
 
 ### Setup with HTTP Server
 
@@ -320,14 +545,13 @@ http://localhost:8000
 
 ### Recommendation: Use Electron
 
-**For true airgap security, use the Electron desktop app (`npm start`)** instead of browser mode. The Electron version provides:
+**For the most secure data profile this application offers, use the Electron desktop app (`npm start`)** instead of browser mode. The Electron version provides:
 
 - ✅ Guaranteed network request blocking at the OS level
 - ✅ No browser extensions or interference
 - ✅ No browser telemetry or tracking
 - ✅ No DNS prefetching or background connections
 - ✅ Complete control over the runtime environment
-- ✅ True airgap enforcement you can verify
 
 **Browser mode is acceptable for:**
 - Testing and development
@@ -340,7 +564,7 @@ http://localhost:8000
 - Confidential work environments
 - Compliance requirements (HIPAA, SOC2, etc.)
 - High-security or classified information
-- Any situation requiring true airgap guarantees
+- Any data that should not be exposed to a browser, when anything could happen
 
 ## Usage
 
@@ -396,9 +620,9 @@ Click the reset button (🔄) in the header to:
 - Start fresh with a new conversation
 - Reset jetski theme animations (if active)
 
-## Airgap Verification
+## External Requests
 
-### How to Verify the Airgap
+### How to Verify the Application is Blocking External Requests
 
 You can verify that the application is blocking external requests by enabling Developer Tools:
 
@@ -502,7 +726,7 @@ session.defaultSession.webRequest.onBeforeRequest({ urls: ['*://*/*'] }, (detail
 
 ```
 Bot Vault/
-├── main.js              # Electron main process (airgap enforcement)
+├── main.js              # Electron main process (strict policies)
 ├── package.json         # Dependencies and scripts
 ├── index.html           # Application UI structure
 ├── script.js            # Application entry point
@@ -1195,18 +1419,17 @@ vm_stat | grep "Pages free" | awk '{print $3*4096/1024/1024/1024 " GB free"}'
 ### Perfect For
 - Privacy-conscious users
 - Secure environments (government, healthcare, finance)
-- Air-gapped networks
+- Local networks
 - Offline work
 - Sensitive data analysis
 - Personal AI assistant without cloud dependencies
 
 ## Differences from Web Version
 
-### Changes Made for Airgap
+### Changes Made for ✌Airgap✌
 1. **Electron wrapper** - Now a desktop app instead of web page
 2. **Bundled dependencies** - marked.js included locally
 3. **System fonts** - No Google Fonts CDN
-4. **Local audio** - MP3 file instead of archive.org streaming
 5. **Network filtering** - Electron session-level request blocking
 
 ### Identical Features

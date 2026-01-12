@@ -7,6 +7,10 @@
   "private": true,
   "scripts": {
     "start": "electron .",
+    "start:lan": "LAN_ACCESS_MODE=true electron .",
+    "server": "LAN_ACCESS_MODE=true node server.js",
+    "server:secure": "LAN_ACCESS_MODE=true ALLOWED_IPS=192.168.7.192 node server.js",
+    "dev": "concurrently \"npm run server\" \"npm run start:lan\"",
     "build": "electron-builder",
     "build:mac": "electron-builder --mac",
     "build:win": "electron-builder --win",
@@ -21,7 +25,6 @@
     "ollama",
     "chatbot",
     "electron",
-    "airgapped",
     "local-ai"
   ],
   "author": "stevepentler",
@@ -34,12 +37,15 @@
   },
   "homepage": "https://github.com/stevepentler/bot-vault#readme",
   "devDependencies": {
+    "concurrently": "^9.2.1",
     "electron": "^39.2.7",
-    "electron-builder": "^26.0.12"
+    "electron-builder": "^26.4.0"
   },
   "dependencies": {
-    "dompurify": "^3.2.2",
-    "marked": "^17.0.0"
+    "dompurify": "^3.3.1",
+    "express": "^5.2.1",
+    "http-proxy-middleware": "^3.0.5",
+    "marked": "^17.0.1"
   },
   "build": {
     "appId": "bot-vault",

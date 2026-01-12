@@ -203,23 +203,31 @@ async function streamChatResponse(messageGroup) {
     // Use requestAnimationFrame for smoother rendering
     let renderScheduled = false;
     let lastRenderTime = 0;
+    let lastRenderedHTML = '';
     
     const scheduleRender = () => {
-        if (renderScheduled) return;
-        
-        const now = Date.now();
-        const timeSinceLastRender = now - lastRenderTime;
-        
-        if (timeSinceLastRender >= MIN_RENDER_INTERVAL) {
-            renderScheduled = true;
-            requestAnimationFrame(() => {
-                const rawHTML = marked.parse(accumulatedContent);
-                messageContent.innerHTML = DOMPurify.sanitize(rawHTML);
-                styleExternalLinks(messageContent); // Add visual indicators to external links
-                lastRenderTime = Date.now();
-                renderScheduled = false;
-            });
-        }
+      if (renderScheduled) return;
+
+      const now = Date.now();
+      const timeSinceLastRender = now - lastRenderTime;
+
+      if (timeSinceLastRender >= MIN_RENDER_INTERVAL) {
+        renderScheduled = true;
+        requestAnimationFrame(() => {
+          const rawHTML = marked.parse(accumulatedContent);
+          const sanitizedHTML = DOMPurify.sanitize(rawHTML);
+
+          // Only update if content has actually changed
+          if (sanitizedHTML !== lastRenderedHTML) {
+              messageContent.innerHTML = sanitizedHTML;
+              styleExternalLinks(messageContent); // Add visual indicators to external links
+              lastRenderedHTML = sanitizedHTML;
+          }
+
+          lastRenderTime = Date.now();
+          renderScheduled = false;
+        });
+      }
     };
     
     try {

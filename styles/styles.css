@@ -275,6 +275,9 @@ body {
     color: var(--text-dark);
     transition: opacity 0.15s ease-out;
     font-size: 14px;
+    /* Reduce flickering during updates */
+    contain: layout style;
+    will-change: contents;
 }
 
 .message.user .message-content {
@@ -298,6 +301,11 @@ body {
 .message-content ul, .message-content ol {
     margin-left: 20px;
     margin-bottom: 12px;
+}
+
+/* Prevent list items from flickering during updates */
+.message-content li {
+    contain: layout;
 }
 
 .message-content code {
